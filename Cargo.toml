@@ -1,0 +1,38 @@
+[package]
+name = "wechat-vault-poc"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+aes = "0.8"
+anyhow = "1.0"
+cbc = { version = "0.1", features = ["alloc"] }
+chrono = "0.4"
+clap = { version = "4.5", features = ["derive"] }
+hex = "0.4"
+hmac = "0.12"
+memchr = "2.7"
+pbkdf2 = "0.12"
+rayon = "1.10"
+rusqlite = { version = "0.31", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha1 = "0.10"
+sha2 = "0.10"
+tempfile = "3"
+zeroize = "1.8"
+
+[target.'cfg(windows)'.dependencies.windows]
+version = "0.44"
+features = [
+    "Win32_Foundation",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Memory",
+    "Win32_System_Threading",
+]
+
+[profile.release]
+lto = "thin"
+strip = true
